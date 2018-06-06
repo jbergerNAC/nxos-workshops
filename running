@@ -1,6 +1,6 @@
 
 !Command: show running-config
-!Time: Wed Jun  6 07:08:35 2018
+!Time: Wed Jun  6 07:11:49 2018
 
 version 7.0(3)I7(3)
 hostname Nexus9000v
@@ -17,6 +17,7 @@ feature nxapi
 feature bash-shell
 feature tacacs+
 feature bgp
+feature isis
 feature interface-vlan
 
 username admin password 5 $5$GHDCLC$PVORZmmMs2AmAplTaomG7JItxUZ6EJpvtcO0kG8an5B  role network-admin
@@ -309,8 +310,8 @@ boot nxos bootflash:/nxos.7.0.3.I7.0.359.bin
 event manager applet writer
   event cli match "copy running-config startup-config"
   action 1 cli delete bootflash:autoconfig/adriani/running.latest no-prompt
-  action 2 event-default
-  action 3 cli copy running bootflash:autoconfig/adriani/running.latest
+  action 2 cli copy running bootflash:autoconfig/adriani/running.latest
+  action 3 event-default
   action 4 cli guestshell run python '/home/vagrant/nxos-workshops/config.py'
   action 5 event-default
 
