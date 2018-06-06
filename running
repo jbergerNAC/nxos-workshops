@@ -1,6 +1,6 @@
 
 !Command: show running-config
-!Time: Wed Jun  6 07:41:07 2018
+!Time: Wed Jun  6 08:56:48 2018
 
 version 7.0(3)I7(3)
 hostname Nexus9000v
@@ -12,8 +12,6 @@ vdc Nexus9000v id 1
   limit-resource u6route-mem minimum 96 maximum 96
   limit-resource m4route-mem minimum 58 maximum 58
   limit-resource m6route-mem minimum 8 maximum 8
-
-feature isis
 
 username admin password 5 $5$GHDCLC$PVORZmmMs2AmAplTaomG7JItxUZ6EJpvtcO0kG8an5B  role network-admin
 username vagrant password 5 $5$XV7/DlbE$4bM5LTMavQzQs4xdIql2AJWEZdmybxvgYu9kT4bYp7C  role network-admin
