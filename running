@@ -15,7 +15,6 @@ vdc Nexus9000v id 1
 
 feature nxapi
 feature bash-shell
-feature vrrp
 feature tacacs+
 feature bgp
 feature udld
