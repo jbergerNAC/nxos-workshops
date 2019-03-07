@@ -1,6 +1,6 @@
 
 !Command: show running-config
-!Time: Thu Mar  7 04:41:38 2019
+!Time: Thu Mar  7 04:42:27 2019
 
 version 7.0(3)I6(1)
 hostname CLMEL19-00
@@ -15,6 +15,7 @@ vdc CLMEL19-00 id 1
 
 feature nxapi
 feature bgp
+feature dhcp
 
 no password strength-check
 username admin password 5 $5$SsPBvp7e$5boaKgb4GZv78IwyyXb8Oqf6mUbjMt9E8cctC2mn0J5  role network-admin
@@ -34,8 +35,12 @@ vlan 200
 vlan 400
   name TEST2
 
+service dhcp
+ip dhcp relay
+ipv6 dhcp relay
 vrf context management
   ip route 0.0.0.0/0 10.10.10.254
+
 
 interface Ethernet1/1
 
