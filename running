@@ -1,6 +1,6 @@
 
 !Command: show running-config
-!Time: Wed Mar  6 11:14:25 2019
+!Time: Thu Mar  7 04:41:38 2019
 
 version 7.0(3)I6(1)
 hostname CLMEL19-00
@@ -13,6 +13,9 @@ vdc CLMEL19-00 id 1
   limit-resource m4route-mem minimum 58 maximum 58
   limit-resource m6route-mem minimum 8 maximum 8
 
+feature nxapi
+feature bgp
+
 no password strength-check
 username admin password 5 $5$SsPBvp7e$5boaKgb4GZv78IwyyXb8Oqf6mUbjMt9E8cctC2mn0J5  role network-admin
 ip domain-lookup
@@ -23,7 +26,13 @@ rmon event 3 description ERROR(3) owner PMON@ERROR
 rmon event 4 description WARNING(4) owner PMON@WARNING
 rmon event 5 description INFORMATION(5) owner PMON@INFO
 
-vlan 1
+vlan 1,100,200,400
+vlan 100
+  name CLMEL-19
+vlan 200
+  name TEST
+vlan 400
+  name TEST2
 
 vrf context management
   ip route 0.0.0.0/0 10.10.10.254
@@ -162,6 +171,21 @@ interface mgmt0
 line console
 line vty
 boot nxos bootflash:/nxos.7.0.3.I6.1.bin 
+router bgp 20
+  router-id 10.0.0.14
+  address-family ipv4 unicast
+    network 10.0.0.11/32
+    network 10.0.0.12/32
+    network 10.0.0.13/32
+    network 10.0.0.14/32
+  neighbor 10.0.0.1
+    remote-as 1
+    description 10.0.0.1
+    address-family ipv4 unicast
+  neighbor 192.168.45.25
+    remote-as 2
+    description 192.168.45.25
+    address-family ipv4 unicast
 event manager applet writer
   event cli match "copy running-config startup-config"
   action 1 cli copy running bootflash:autoconfig/adriani/running.latest
