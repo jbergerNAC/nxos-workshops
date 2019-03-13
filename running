@@ -1,6 +1,6 @@
 
 !Command: show running-config
-!Time: Thu Mar  7 04:42:27 2019
+!Time: Wed Mar 13 17:44:24 2019
 
 version 7.0(3)I6(1)
 hostname CLMEL19-00
@@ -18,9 +18,9 @@ feature bgp
 feature dhcp
 
 no password strength-check
-username admin password 5 $5$SsPBvp7e$5boaKgb4GZv78IwyyXb8Oqf6mUbjMt9E8cctC2mn0J5  role network-admin
+username admin password 5 $5$JFIBFJ$HX8CHcr4bfC67O/l87aKQOOTOTYK0UnVkrDKD4VxRH9  role network-admin
 ip domain-lookup
-snmp-server user admin network-admin auth md5 0x9e8d90614691c409ea5dc7457b3fcb29 priv 0x9e8d90614691c409ea5dc7457b3fcb29 localizedkey
+snmp-server user admin network-admin auth md5 0x90ad4d42d054d5b52e66cd21317c3091 priv 0x90ad4d42d054d5b52e66cd21317c3091 localizedkey
 rmon event 1 description FATAL(1) owner PMON@FATAL
 rmon event 2 description CRITICAL(2) owner PMON@CRITICAL
 rmon event 3 description ERROR(3) owner PMON@ERROR
