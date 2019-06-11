@@ -1,10 +1,11 @@
 
 !Command: show running-config
-!Time: Wed Mar 13 17:44:24 2019
+!Running configuration last done at: Tue Jun 11 17:27:19 2019
+!Time: Tue Jun 11 17:27:25 2019
 
-version 7.0(3)I6(1)
-hostname CLMEL19-00
-vdc CLMEL19-00 id 1
+version 9.2(3) Bios:version  
+hostname CLUS-19-00
+vdc CLUS-19-00 id 1
   limit-resource vlan minimum 16 maximum 4094
   limit-resource vrf minimum 2 maximum 4096
   limit-resource port-channel minimum 0 maximum 511
@@ -13,34 +14,23 @@ vdc CLMEL19-00 id 1
   limit-resource m4route-mem minimum 58 maximum 58
   limit-resource m6route-mem minimum 8 maximum 8
 
-feature nxapi
-feature bgp
-feature dhcp
+feature ospf
 
 no password strength-check
-username admin password 5 $5$JFIBFJ$HX8CHcr4bfC67O/l87aKQOOTOTYK0UnVkrDKD4VxRH9  role network-admin
+username admin password 5 $5$ZBnEvTC4$aowxv98XD0kP9mo2.g8Q56yOLKEg818wlIKQgYru.v0  role network-admin
 ip domain-lookup
-snmp-server user admin network-admin auth md5 0x90ad4d42d054d5b52e66cd21317c3091 priv 0x90ad4d42d054d5b52e66cd21317c3091 localizedkey
+copp profile strict
+snmp-server user admin network-admin auth md5 0x387e40ef55513d9393ec9a47f422c42e priv 0x387e40ef55513d9393ec9a47f422c42e localizedkey
 rmon event 1 description FATAL(1) owner PMON@FATAL
 rmon event 2 description CRITICAL(2) owner PMON@CRITICAL
 rmon event 3 description ERROR(3) owner PMON@ERROR
 rmon event 4 description WARNING(4) owner PMON@WARNING
 rmon event 5 description INFORMATION(5) owner PMON@INFO
 
-vlan 1,100,200,400
-vlan 100
-  name CLMEL-19
-vlan 200
-  name TEST
-vlan 400
-  name TEST2
+vlan 1
 
-service dhcp
-ip dhcp relay
-ipv6 dhcp relay
 vrf context management
   ip route 0.0.0.0/0 10.10.10.254
-
 
 interface Ethernet1/1
 
@@ -170,31 +160,145 @@ interface Ethernet1/63
 
 interface Ethernet1/64
 
+interface Ethernet1/65
+
+interface Ethernet1/66
+
+interface Ethernet1/67
+
+interface Ethernet1/68
+
+interface Ethernet1/69
+
+interface Ethernet1/70
+
+interface Ethernet1/71
+
+interface Ethernet1/72
+
+interface Ethernet1/73
+
+interface Ethernet1/74
+
+interface Ethernet1/75
+
+interface Ethernet1/76
+
+interface Ethernet1/77
+
+interface Ethernet1/78
+
+interface Ethernet1/79
+
+interface Ethernet1/80
+
+interface Ethernet1/81
+
+interface Ethernet1/82
+
+interface Ethernet1/83
+
+interface Ethernet1/84
+
+interface Ethernet1/85
+
+interface Ethernet1/86
+
+interface Ethernet1/87
+
+interface Ethernet1/88
+
+interface Ethernet1/89
+
+interface Ethernet1/90
+
+interface Ethernet1/91
+
+interface Ethernet1/92
+
+interface Ethernet1/93
+
+interface Ethernet1/94
+
+interface Ethernet1/95
+
+interface Ethernet1/96
+
+interface Ethernet1/97
+
+interface Ethernet1/98
+
+interface Ethernet1/99
+
+interface Ethernet1/100
+
+interface Ethernet1/101
+
+interface Ethernet1/102
+
+interface Ethernet1/103
+
+interface Ethernet1/104
+
+interface Ethernet1/105
+
+interface Ethernet1/106
+
+interface Ethernet1/107
+
+interface Ethernet1/108
+
+interface Ethernet1/109
+
+interface Ethernet1/110
+
+interface Ethernet1/111
+
+interface Ethernet1/112
+
+interface Ethernet1/113
+
+interface Ethernet1/114
+
+interface Ethernet1/115
+
+interface Ethernet1/116
+
+interface Ethernet1/117
+
+interface Ethernet1/118
+
+interface Ethernet1/119
+
+interface Ethernet1/120
+
+interface Ethernet1/121
+
+interface Ethernet1/122
+
+interface Ethernet1/123
+
+interface Ethernet1/124
+
+interface Ethernet1/125
+
+interface Ethernet1/126
+
+interface Ethernet1/127
+
+interface Ethernet1/128
+
 interface mgmt0
   vrf member management
-  ip address 10.10.10.170/24
+  ip address 10.10.10.60/24
 line console
 line vty
-boot nxos bootflash:/nxos.7.0.3.I6.1.bin 
-router bgp 20
-  router-id 10.0.0.14
-  address-family ipv4 unicast
-    network 10.0.0.11/32
-    network 10.0.0.12/32
-    network 10.0.0.13/32
-    network 10.0.0.14/32
-  neighbor 10.0.0.1
-    remote-as 1
-    description 10.0.0.1
-    address-family ipv4 unicast
-  neighbor 192.168.45.25
-    remote-as 2
-    description 192.168.45.25
-    address-family ipv4 unicast
+boot nxos bootflash:/nxos.9.2.3.bin 
 event manager applet writer
   event cli match "copy running-config startup-config"
   action 1 cli copy running bootflash:autoconfig/adriani/running.latest
   action 2 cli guestshell run python '/home/admin/nxos-workshops/config.py'
   action 3 event-default
+
 
 
