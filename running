@@ -1,7 +1,7 @@
 
 !Command: show running-config
-!Running configuration last done at: Tue Jun 11 17:27:19 2019
-!Time: Tue Jun 11 17:27:25 2019
+!Running configuration last done at: Tue Jun 11 17:30:19 2019
+!Time: Tue Jun 11 17:30:22 2019
 
 version 9.2(3) Bios:version  
 hostname CLUS-19-00
@@ -15,6 +15,7 @@ vdc CLUS-19-00 id 1
   limit-resource m6route-mem minimum 8 maximum 8
 
 feature ospf
+feature bgp
 
 no password strength-check
 username admin password 5 $5$ZBnEvTC4$aowxv98XD0kP9mo2.g8Q56yOLKEg818wlIKQgYru.v0  role network-admin
