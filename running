@@ -1,7 +1,7 @@
 
 !Command: show running-config
-!Running configuration last done at: Thu Jun 13 17:33:25 2019
-!Time: Thu Jun 13 17:34:36 2019
+!Running configuration last done at: Thu Jun 13 17:35:10 2019
+!Time: Thu Jun 13 17:35:14 2019
 
 version 9.2(3) Bios:version  
 hostname CLUS-19-00
@@ -13,6 +13,9 @@ vdc CLUS-19-00 id 1
   limit-resource u6route-mem minimum 96 maximum 96
   limit-resource m4route-mem minimum 58 maximum 58
   limit-resource m6route-mem minimum 8 maximum 8
+
+feature nxapi
+feature nxsdk
 
 no password strength-check
 username admin password 5 $5$SVLrcC53$wdk5zKfCmIws51ExOFmfKn625fowQReioCpSNB.Q3R6  role network-admin
