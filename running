@@ -1,7 +1,7 @@
 
 !Command: show running-config
-!Running configuration last done at: Tue Jun 11 17:30:59 2019
-!Time: Tue Jun 11 17:31:02 2019
+!Running configuration last done at: Thu Jun 13 17:33:25 2019
+!Time: Thu Jun 13 17:34:36 2019
 
 version 9.2(3) Bios:version  
 hostname CLUS-19-00
@@ -14,15 +14,11 @@ vdc CLUS-19-00 id 1
   limit-resource m4route-mem minimum 58 maximum 58
   limit-resource m6route-mem minimum 8 maximum 8
 
-feature ospf
-feature bgp
-feature nxsdk
-
 no password strength-check
-username admin password 5 $5$ZBnEvTC4$aowxv98XD0kP9mo2.g8Q56yOLKEg818wlIKQgYru.v0  role network-admin
+username admin password 5 $5$SVLrcC53$wdk5zKfCmIws51ExOFmfKn625fowQReioCpSNB.Q3R6  role network-admin
 ip domain-lookup
 copp profile strict
-snmp-server user admin network-admin auth md5 0x387e40ef55513d9393ec9a47f422c42e priv 0x387e40ef55513d9393ec9a47f422c42e localizedkey
+snmp-server user admin network-admin auth md5 0x47c9450b20bde75aa16147f479342c5a priv 0x47c9450b20bde75aa16147f479342c5a localizedkey
 rmon event 1 description FATAL(1) owner PMON@FATAL
 rmon event 2 description CRITICAL(2) owner PMON@CRITICAL
 rmon event 3 description ERROR(3) owner PMON@ERROR
