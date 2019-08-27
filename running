@@ -1,7 +1,7 @@
 
 !Command: show running-config
-!Running configuration last done at: Tue Aug 27 20:18:55 2019
-!Time: Tue Aug 27 20:19:21 2019
+!Running configuration last done at: Tue Aug 27 20:20:33 2019
+!Time: Tue Aug 27 20:20:37 2019
 
 version 9.2(3) Bios:version  
 hostname IMPACTFY20-00
@@ -13,6 +13,8 @@ vdc IMPACTFY20-00 id 1
   limit-resource u6route-mem minimum 96 maximum 96
   limit-resource m4route-mem minimum 58 maximum 58
   limit-resource m6route-mem minimum 8 maximum 8
+
+feature nxapi
 
 no password strength-check
 username admin password 5 $5$mFlZMm6Y$NuoeyI7Tb.QITgoeWOnjmvZq5Mh8FgJrrZHH4ekteE1  role network-admin
