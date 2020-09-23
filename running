@@ -1,7 +1,7 @@
 
 !Command: show running-config
-!Running configuration last done at: Tue Sep 15 02:44:48 2020
-!Time: Tue Sep 15 02:44:53 2020
+!Running configuration last done at: Wed Sep 23 14:15:03 2020
+!Time: Wed Sep 23 14:16:43 2020
 
 version 9.2(3) Bios:version  
 hostname dist-sw01
@@ -15,6 +15,7 @@ vdc dist-sw01 id 1
   limit-resource m6route-mem minimum 8 maximum 8
 
 feature telnet
+feature nxapi
 feature bash-shell
 cfs eth distribute
 feature ospf
@@ -24,7 +25,7 @@ feature lacp
 feature vpc
 
 no password strength-check
-username admin password 5 $5$DDBBPL$qkWzrzaWqyMJSx2H6DxztHMV1oTN57roIyIMcEpHi19  role network-admin
+username admin password 5 $1$KuOSBsvW$Cy0TSD..gEBGBPjzpDgf51  role network-admin
 username adminbackup password 5 !  role network-operator
 username adminbackup passphrase  lifetime 99999 warntime 14 gracetime 3
 username cisco password 5 $1$Nk7ZkwH0$fyiRmMMfIheqE3BqvcL0C1  role network-operator
@@ -33,9 +34,8 @@ username cisco passphrase  lifetime 99999 warntime 14 gracetime 3
 username lab password 5 $1$buoy/oqy$.EXQz8rCn72ii8qtdldj00  role network-admin
 username lab passphrase  lifetime 99999 warntime 14 gracetime 3
 ip domain-lookup
-copp profile strict
 snmp-server user lab network-admin auth md5 0x5ceb414591539ee35159fca86fdfa101 priv 0x5ceb414591539ee35159fca86fdfa101 localizedkey
-snmp-server user admin network-admin auth md5 0x9abb60a363404aba444f39704226fb1f priv 0x9abb60a363404aba444f39704226fb1f localizedkey
+snmp-server user admin network-admin auth md5 0x328945d53e05e8e7207f8c20b142f0b7 priv 0x328945d53e05e8e7207f8c20b142f0b7 localizedkey
 snmp-server user cisco network-operator auth md5 0x55b3c64a53fb95518e75358ee75e82e9 priv 0x55b3c64a53fb95518e75358ee75e82e9 localizedkey
 snmp-server user cisco network-admin
 rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
@@ -44,7 +44,7 @@ rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
 rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
 rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
 
-vlan 1,101-105
+vlan 1,101-105,111-112,222,300,400,500,600,700,800,900
 vlan 101
   name prod
 vlan 102
@@ -55,6 +55,26 @@ vlan 104
   name security
 vlan 105
   name iot
+vlan 111
+  name NX-API-REST-Sandbox
+vlan 112
+  name NX-API-REST-Sandbox2
+vlan 222
+  name Hashi-Vault
+vlan 300
+  name TEST-Postman
+vlan 400
+  name TEST-Postman-2
+vlan 500
+  name NX-API_CLI_Sandbox
+vlan 600
+  name NX-API-CLI-Sandbox-2
+vlan 700
+  name Test_VLAN
+vlan 800
+  name NX-API-CLI-Sandbox-3
+vlan 900
+  name NX-API-CLI-Sandbox-4
 
 vrf context management
   ip route 0.0.0.0/0 10.10.20.254
@@ -151,8 +171,8 @@ interface Ethernet1/4
   no shutdown
 
 interface Ethernet1/5
-  description to
-  shutdown
+  no switchport
+  ip address 1.1.1.1/24
 
 interface Ethernet1/6
   description to
@@ -426,6 +446,7 @@ line console
   exec-timeout 0
   terminal width  511
 line vty
+boot nxos bootflash:/nxos.9.2.3.bin 
 router ospf 1
   passive-interface default
 event manager applet writer
