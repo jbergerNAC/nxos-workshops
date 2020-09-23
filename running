@@ -1,7 +1,7 @@
 
 !Command: show running-config
-!Running configuration last done at: Wed Sep 23 14:15:03 2020
-!Time: Wed Sep 23 14:16:43 2020
+!Running configuration last done at: Wed Sep 23 14:17:37 2020
+!Time: Wed Sep 23 14:17:44 2020
 
 version 9.2(3) Bios:version  
 hostname dist-sw01
@@ -22,6 +22,7 @@ feature ospf
 feature interface-vlan
 feature hsrp
 feature lacp
+feature dhcp
 feature vpc
 
 no password strength-check
@@ -76,6 +77,9 @@ vlan 800
 vlan 900
   name NX-API-CLI-Sandbox-4
 
+service dhcp
+ip dhcp relay
+ipv6 dhcp relay
 vrf context management
   ip route 0.0.0.0/0 10.10.20.254
 hardware forwarding unicast trace
