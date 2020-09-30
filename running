@@ -1,11 +1,11 @@
 
 !Command: show running-config
-!Running configuration last done at: Wed Sep 23 14:17:37 2020
-!Time: Wed Sep 23 14:17:44 2020
+!Running configuration last done at: Wed Sep 30 22:58:17 2020
+!Time: Wed Sep 30 23:00:18 2020
 
 version 9.2(3) Bios:version  
-hostname dist-sw01
-vdc dist-sw01 id 1
+hostname dist-sw02
+vdc dist-sw02 id 1
   limit-resource vlan minimum 16 maximum 4094
   limit-resource vrf minimum 2 maximum 4096
   limit-resource port-channel minimum 0 maximum 511
@@ -15,14 +15,11 @@ vdc dist-sw01 id 1
   limit-resource m6route-mem minimum 8 maximum 8
 
 feature telnet
-feature nxapi
-feature bash-shell
 cfs eth distribute
 feature ospf
 feature interface-vlan
 feature hsrp
 feature lacp
-feature dhcp
 feature vpc
 
 no password strength-check
@@ -35,6 +32,7 @@ username cisco passphrase  lifetime 99999 warntime 14 gracetime 3
 username lab password 5 $1$buoy/oqy$.EXQz8rCn72ii8qtdldj00  role network-admin
 username lab passphrase  lifetime 99999 warntime 14 gracetime 3
 ip domain-lookup
+copp profile strict
 snmp-server user lab network-admin auth md5 0x5ceb414591539ee35159fca86fdfa101 priv 0x5ceb414591539ee35159fca86fdfa101 localizedkey
 snmp-server user admin network-admin auth md5 0x328945d53e05e8e7207f8c20b142f0b7 priv 0x328945d53e05e8e7207f8c20b142f0b7 localizedkey
 snmp-server user cisco network-operator auth md5 0x55b3c64a53fb95518e75358ee75e82e9 priv 0x55b3c64a53fb95518e75358ee75e82e9 localizedkey
@@ -45,7 +43,7 @@ rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
 rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
 rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
 
-vlan 1,101-105,111-112,222,300,400,500,600,700,800,900
+vlan 1,101-105
 vlan 101
   name prod
 vlan 102
@@ -56,36 +54,13 @@ vlan 104
   name security
 vlan 105
   name iot
-vlan 111
-  name NX-API-REST-Sandbox
-vlan 112
-  name NX-API-REST-Sandbox2
-vlan 222
-  name Hashi-Vault
-vlan 300
-  name TEST-Postman
-vlan 400
-  name TEST-Postman-2
-vlan 500
-  name NX-API_CLI_Sandbox
-vlan 600
-  name NX-API-CLI-Sandbox-2
-vlan 700
-  name Test_VLAN
-vlan 800
-  name NX-API-CLI-Sandbox-3
-vlan 900
-  name NX-API-CLI-Sandbox-4
 
-service dhcp
-ip dhcp relay
-ipv6 dhcp relay
 vrf context management
   ip route 0.0.0.0/0 10.10.20.254
 hardware forwarding unicast trace
 vpc domain 101
   peer-switch
-  peer-keepalive destination 10.10.20.178 source 10.10.20.177
+  peer-keepalive destination 10.10.20.177 source 10.10.20.178
   peer-gateway
 
 
@@ -97,7 +72,7 @@ interface Vlan101
   description prod svi
   no shutdown
   no ip redirects
-  ip address 172.16.101.2/24
+  ip address 172.16.101.3/24
   no ipv6 redirects
   ip router ospf 1 area 0.0.0.0
   hsrp 10 
@@ -107,7 +82,7 @@ interface Vlan102
   description dev svi
   no shutdown
   no ip redirects
-  ip address 172.16.102.2/24
+  ip address 172.16.102.3/24
   no ipv6 redirects
   ip router ospf 1 area 0.0.0.0
   hsrp 10 
@@ -117,7 +92,7 @@ interface Vlan103
   description test svi
   no shutdown
   no ip redirects
-  ip address 172.16.103.2/24
+  ip address 172.16.103.3/24
   no ipv6 redirects
   ip router ospf 1 area 0.0.0.0
   hsrp 10 
@@ -127,7 +102,7 @@ interface Vlan104
   description security svi
   no shutdown
   no ip redirects
-  ip address 172.16.104.2/24
+  ip address 172.16.104.3/24
   no ipv6 redirects
   ip router ospf 1 area 0.0.0.0
   hsrp 10 
@@ -137,7 +112,7 @@ interface Vlan105
   description iot svi
   no shutdown
   no ip redirects
-  ip address 172.16.105.2/24
+  ip address 172.16.105.3/24
   no ipv6 redirects
   ip router ospf 1 area 0.0.0.0
   hsrp 10 
@@ -161,7 +136,7 @@ interface Ethernet1/2
 interface Ethernet1/3
   description L3 link to dist-rtr01
   no switchport
-  ip address 172.16.252.1/30
+  ip address 172.16.252.9/30
   no ip ospf passive-interface
   ip router ospf 1 area 0.0.0.0
   no shutdown
@@ -169,14 +144,14 @@ interface Ethernet1/3
 interface Ethernet1/4
   description L3 link to dist-rtr02
   no switchport
-  ip address 172.16.252.5/30
+  ip address 172.16.252.13/30
   no ip ospf passive-interface
   ip router ospf 1 area 0.0.0.0
   no shutdown
 
 interface Ethernet1/5
-  no switchport
-  ip address 1.1.1.1/24
+  description to
+  shutdown
 
 interface Ethernet1/6
   description to
@@ -199,8 +174,8 @@ interface Ethernet1/10
   shutdown
 
 interface Ethernet1/11
-  description Link to inside-host01
-  switchport access vlan 101
+  description Link to inside-host02
+  switchport access vlan 102
   spanning-tree port type edge
 
 interface Ethernet1/12
@@ -438,10 +413,10 @@ interface Ethernet1/127
 interface Ethernet1/128
 
 interface mgmt0
-  description to port8.sandbox-backend
+  description to port9.sandbox-backend
   duplex full
   vrf member management
-  ip address 10.10.20.177/24
+  ip address 10.10.20.178/24
 
 interface loopback0
   description to
